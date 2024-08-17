@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     paddingBottom: 12,
+    backgroundColor: "white",
   },
 });
 
