@@ -12,7 +12,7 @@ const RepositoryItemHeading = ({
 }) => {
 
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View style={{ flexDirection: "row", paddingBottom: 2 }}>
       <View style={{ paddingRight: 12 }}>
         <Image source={{ uri: ownerAvatarUrl }} style={styles.image} />
       </View>
