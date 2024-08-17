@@ -1,9 +1,11 @@
+// theme.js
 const theme = {
   colors: {
     textPrimary: "#24292e",
     textSecondary: "#586069",
     textLight: "#ffffff",
     primary: "#0366d6",
+    backgroundColor: "#24292e",
   },
   fontSizes: {
     body: 14,
