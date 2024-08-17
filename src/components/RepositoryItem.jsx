@@ -13,7 +13,7 @@ const RepositoryItem = ({
   ownerAvatarUrl,
 }) => {
   return (
-    <View>
+    <View style={{ marginLeft: 6, marginTop: 6 }}>
       <Image
         source={{ uri: ownerAvatarUrl }}
         style={{ width: 50, height: 50 }}

@@ -1,12 +1,14 @@
+// AppBar.jsx
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import Constants from "expo-constants";
-import Text from "./Text";
+import AppBarTab from "./AppBarTab";
+import theme from "../theme";
 
-const sytles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight + 10,
-    backgroundColor: "#24292e",
+    backgroundColor: theme.colors.backgroundColor,
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
@@ -23,11 +25,13 @@ const sytles = StyleSheet.create({
 
 const AppBar = () => {
   return (
-    <View style={sytles.container}>
-      <View style={sytles.textContainer}>
-        <Text color="textLight" fontWeight="bold">Repositories</Text>
+    <TouchableWithoutFeedback>
+      <View style={styles.container}>
+        <View style={styles.textContainer}>
+          <AppBarTab>Repositories</AppBarTab>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
