@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { Formik } from "formik";
 import FormikTextInput from "./FormikTextInput";
+import { loginValidation } from "../validations/validationsLogin";
 
 const SignIn = () => {
   const styles = StyleSheet.create({
@@ -9,14 +10,14 @@ const SignIn = () => {
       margin: 12,
     },
     customButton: {
-      height: 65,
+      height: 55,
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "#007bff",
       borderRadius: 5,
     },
     buttonText: {
-      fontSize: 18,
+      fontSize: 16,
       color: "#ffffff",
       fontWeight: "bold",
     },
@@ -26,25 +27,17 @@ const SignIn = () => {
     <View>
       <Formik
         initialValues={{ username: "", password: "" }}
+        validationSchema={loginValidation}
         onSubmit={(values) => {
           console.log(values);
         }}
       >
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
+        {({ handleSubmit }) => (
           <View style={styles.allMargin}>
-            <FormikTextInput
-              name="username"
-              placeholder="Username"
-              onChangeText={handleChange("username")}
-              onBlur={handleBlur("username")}
-              value={values.username}
-            />
+            <FormikTextInput name="username" placeholder="Username" />
             <FormikTextInput
               name="password"
               placeholder="Password"
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              value={values.password}
               secureTextEntry
             />
             <TouchableOpacity
