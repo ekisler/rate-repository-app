@@ -1,4 +1,18 @@
 // theme.js
+const typePlatform = (() => {
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  if (/android/i.test(userAgent)) {
+    return "Roboto";
+  }
+
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    return "Arial";
+  }
+
+  return "System";
+})();
+
 const theme = {
   colors: {
     textPrimary: "#24292e",
@@ -12,7 +26,7 @@ const theme = {
     subheading: 16,
   },
   fonts: {
-    main: "System",
+    main: typePlatform,
   },
   fontWeights: {
     normal: "400",
