@@ -10,10 +10,10 @@ const RepositoryDetails = (props) => {
   return (
     <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
       <View>
-        <Text fontWeight="bold" align="center">
+        <Text fontWeight="bold" align="center" >
           {byThousands(props.stargazersCount)}
         </Text>
-        <Text>Stars</Text>
+        <Text fontFamily="main">Stars</Text>
       </View>
       <View>
         <Text fontWeight="bold" align="center">

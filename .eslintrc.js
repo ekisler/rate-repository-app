@@ -1,8 +1,8 @@
 // https://docs.expo.dev/guides/using-eslint/
 module.exports = {
-  extends: 'expo',
+  extends: "expo",
   rules: {
-    "semi": ["error", "always"],
-    "quotes": ["error", "double"]
-  }
+    semi: ["error", "always"],
+    quotes: ["error", "double"],
+  },
 };
