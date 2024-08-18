@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image } from "react-native";
+import { View, Image, TouchableWithoutFeedback } from "react-native";
 import Text from "./Text";
 import theme from "../theme";
 import RepositoryDetails from "./RepositoryDetails";
@@ -10,7 +10,6 @@ const RepositoryItemHeading = ({
   language,
   ownerAvatarUrl,
 }) => {
-
   return (
     <View style={{ flexDirection: "row", paddingBottom: 2 }}>
       <View style={{ paddingRight: 12 }}>
@@ -26,10 +25,12 @@ const RepositoryItemHeading = ({
 };
 
 const RepositoryItem = (props) => (
-  <View key={props.id} style={styles.container}>
-    <RepositoryItemHeading {...props} />
-    <RepositoryDetails {...props} />
-  </View>
+  <TouchableWithoutFeedback>
+    <View key={props.id} style={styles.container}>
+      <RepositoryItemHeading {...props} />
+      <RepositoryDetails {...props} />
+    </View>
+  </TouchableWithoutFeedback>
 );
 
 const styles = {
