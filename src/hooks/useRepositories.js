@@ -1,28 +1,37 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_REPOSITORIES } from "../graphql/queries";
 
 const useRepositories = () => {
- 
-  const [repositories, setRepositories] = useState();
-  const [loading, setLoading] = useState(false);
-
-  const fetchRepositories = async () => {
-    setLoading(true);
-
-    const response = await fetch("http://192.168.1.42:5001/api/repositories");
-    const json = await response.json();
-
-    setLoading(false);
-    setRepositories(json);
-  };
+  const { loading, error, data, refetch } = useQuery(GET_REPOSITORIES);
+  const [repositories, setRepositories] = useState([]);
 
   useEffect(() => {
-    fetchRepositories();
-  }, []);
+    if (data) {
+     // console.log("Data received:", data?.repositories?.edges);
+      if (data?.repositories && data?.repositories?.edges) {
+        const nodes = data?.repositories?.edges.map((edge) => ({
+          description: edge.node.description,
+          name: edge.node.name,
+          forksCount: edge.node.forksCount,
+          fullName: edge.node.fullName,
+          language: edge.node.language,
+          ownerAvatarUrl: edge.node.ownerAvatarUrl,
+          ratingAverage: edge.node.ratingAverage,
+          reviewCount: edge.node.reviewCount,
+          stargazersCount: edge.node.stargazersCount,
+        }));
+        setRepositories(nodes);
+        // console.log("Processed repositories:", nodes); 
+      } else {
+        console.error("Unexpected data structure:", data);
+      }
+    } else {
+      console.error("No data received");
+    }
+  }, [data]);
 
-  return { repositories, loading, refetch: fetchRepositories };
+  return { repositories, loading, error, refetch };
 };
 
 export default useRepositories;
-
-
-
