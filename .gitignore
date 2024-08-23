@@ -36,3 +36,4 @@ yarn-error.*
 
 # Others 
 package-lock.json
+.env
