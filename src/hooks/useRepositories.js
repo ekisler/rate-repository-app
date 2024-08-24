@@ -8,8 +8,7 @@ const useRepositories = () => {
 
   useEffect(() => {
     if (data) {
-     // console.log("Data received:", data?.repositories?.edges);
-      if (data?.repositories && data?.repositories?.edges) {
+      if (!loading && data?.repositories?.edges) {
         const nodes = data?.repositories?.edges.map((edge) => ({
           description: edge.node.description,
           name: edge.node.name,
@@ -21,15 +20,10 @@ const useRepositories = () => {
           reviewCount: edge.node.reviewCount,
           stargazersCount: edge.node.stargazersCount,
         }));
-        setRepositories(nodes);
-        // console.log("Processed repositories:", nodes); 
-      } else {
-        console.error("Unexpected data structure:", data);
-      }
-    } else {
-      console.error("No data received");
-    }
-  }, [data]);
+        setRepositories([...nodes]);
+      } 
+    } 
+  }, [data, loading, error]);
 
   return { repositories, loading, error, refetch };
 };

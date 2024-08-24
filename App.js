@@ -1,12 +1,15 @@
 import React from "react";
 import { NativeRouter } from "react-router-native";
 import { StatusBar } from "expo-status-bar";
+import Constants  from "expo-constants"; 
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 import Main from "./src/components/Main";
+// const APOLLO_URI = Constants.expoConfig.extra.env.apolloUri;
+const APOLLO_URI = Constants.manifest2.extra.expoClient.extra.env.apolloUri;
 
 const client = new ApolloClient({
-  uri: "https://f62c-190-114-247-131.ngrok-free.app/graphql",
+  uri: APOLLO_URI,
   cache: new InMemoryCache(),
   debug: true,
 });
