@@ -5,11 +5,12 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Formik } from "formik";
 import useSignIn from "../hooks/useSignIn";
 import FormikTextInput from "./FormikTextInput";
 import { loginValidation } from "../validations/validationsLogin";
+import AuthStorage from "../utils/authStorage";
 
 const SignIn = () => {
   const [signIn] = useSignIn();
@@ -45,6 +46,9 @@ const SignIn = () => {
       console.log("User authenticated:", result);
       setUser(result.username);
       setToken(result.accessToken);
+
+      const authStorage = new AuthStorage("auth");
+      await authStorage.setAccessToken(result.accessToken);
     } catch (error) {
       console.log("Error in sesion:", error);
       setError(error.message || "Invalid username or password");
@@ -55,8 +59,9 @@ const SignIn = () => {
 
   useEffect(() => {
     if (username && token) {
-      AsyncStorage.setItem("@auth:token", token);
-      AsyncStorage.setItem("@auth:username", username);
+      const authStorage = new AuthStorage("auth");
+      authStorage.setAccessToken(token);
+      authStorage.setUserName(username);
     }
   }, [username, token]);
 
