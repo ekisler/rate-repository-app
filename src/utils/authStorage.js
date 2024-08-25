@@ -1,3 +1,4 @@
+// authStorage.js
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class AuthStorage {

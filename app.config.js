@@ -16,6 +16,10 @@ export default {
   updates: {
     url: "https://u.expo.dev/3e99ce8f-961c-49ec-8fbb-57ba8f7ab970",
   },
-  android: {},
-  ios: {},
+  android: {
+    "package": "com.ekisler.raterepositoryapp"
+  },
+  ios: {
+    "bundleIdentifier": "com.ekisler.raterepositoryapp"
+  },
 };

@@ -1,23 +1,21 @@
 import { useState, useEffect } from "react";
-import {
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useApolloClient } from "@apollo/client";
 import { Formik } from "formik";
 import useSignIn from "../hooks/useSignIn";
 import FormikTextInput from "./FormikTextInput";
 import { loginValidation } from "../validations/validationsLogin";
 import AuthStorage from "../utils/authStorage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignIn = () => {
   const [signIn] = useSignIn();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [username, setUser] = useState(null);
+  const [username, setUsername] = useState(null);
   const [token, setToken] = useState(null);
+  const apolloClient = useApolloClient();
 
   const styles = StyleSheet.create({
     allMargin: {
@@ -43,12 +41,13 @@ const SignIn = () => {
       const username = values.username.trim();
       const password = values.password.trim();
       const result = await signIn({ username, password });
-      console.log("User authenticated:", result);
-      setUser(result.username);
+      // console.log("User authenticated:", result);
+      setUsername(result.username);
       setToken(result.accessToken);
 
-      const authStorage = new AuthStorage("auth");
-      await authStorage.setAccessToken(result.accessToken);
+      await AsyncStorage.setItem("access_token", result.accessToken);
+
+      apolloClient.resetStore();
     } catch (error) {
       console.log("Error in sesion:", error);
       setError(error.message || "Invalid username or password");
@@ -65,11 +64,9 @@ const SignIn = () => {
     }
   }, [username, token]);
 
-
-
   return (
     <View>
-       {username && token && (
+      {username && token && (
         <Text style={styles.successMessage}>Welcome, {username}!</Text>
       )}
       <Formik
@@ -97,7 +94,6 @@ const SignIn = () => {
           </View>
         )}
       </Formik>
-     
     </View>
   );
 };
