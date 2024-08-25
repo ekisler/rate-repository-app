@@ -1,4 +1,4 @@
-package com.raterepositoryapp
+package com.ekisler.raterepositoryapp
 
 import android.os.Build
 import android.os.Bundle

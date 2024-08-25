@@ -1,4 +1,4 @@
-package com.raterepositoryapp
+package com.ekisler.raterepositoryapp
 
 import android.app.Application
 import android.content.res.Configuration
